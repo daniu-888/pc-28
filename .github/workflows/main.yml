@@ -9,7 +9,23 @@ jobs:
   visit:
     runs-on: ubuntu-latest
     steps:
-      - name: 访问目标链接
+      - name: 使用 Node.js 访问
         run: |
-          curl -H "User-Agent: Mozilla/5.0" \
-            'http://pc28.asia/index.php?action=refresh&code=pc28@2026'
+          node -e "
+          const https = require('https');
+          const http = require('http');
+          const url = 'http://pc28.asia/index.php?action=refresh&code=pc28@2026';
+          const protocol = url.startsWith('https') ? https : http;
+          const options = {
+            headers: {
+              'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+              'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+              'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
+            }
+          };
+          protocol.get(url, options, (res) => {
+            let data = '';
+            res.on('data', chunk => data += chunk);
+            res.on('end', () => console.log(data));
+          }).on('error', err => console.log('Error:', err.message));
+          "
