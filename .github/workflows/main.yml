@@ -2,7 +2,7 @@ name: PC28 Timer
 
 on:
   schedule:
-    - cron: '*/30 * * * *'
+    - cron: '*/3 * * * *'
   workflow_dispatch:
 
 jobs:
