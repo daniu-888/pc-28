@@ -12,4 +12,4 @@ jobs:
       - name: 访问目标链接
         run: |
           curl -H "User-Agent: Mozilla/5.0" \
-               'http://pc28.asia/index.php?action=refresh&code=pc28@2026'
+            'http://pc28.asia/index.php?action=refresh&code=pc28@2026'
